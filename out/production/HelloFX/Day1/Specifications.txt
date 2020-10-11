@@ -1,0 +1,11 @@
+1. Car is a rectangle
+2. Car can move
+3. Car always follows mouse clicked
+
+//it ended up acting like a mad square quickly darting to the mouse location
+//end day1 :)
+
+
+1 foxes roam around unless it sees a rabbit
+2 foxes chase rabbits
+3 rabbits do not move just spawn

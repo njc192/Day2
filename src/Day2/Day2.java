@@ -2,12 +2,15 @@ package Day2;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,6 +23,8 @@ public class Day2 extends Application {
     private static final int NUM_OF_RABBITS = 5;
     private Fox fox;
     private List<Rabbit> rabbits;
+
+    private Pane root;
 
     public static void main(String[] args) {
         launch(args);
@@ -41,12 +46,12 @@ public class Day2 extends Application {
 //        }
 //    });
 
-    @Override
-    public void start(Stage primaryStage) {
 
+    private Parent createContent()
+    {
         int r1;
         int r2;
-        Pane root = new Pane();
+        root = new Pane();
 
         rabbits = new ArrayList<>();
 
@@ -55,48 +60,54 @@ public class Day2 extends Application {
         rabbits.add(q);
 
         q.setOnMouseClicked(e -> {
-            System.out.println(q);
+            System.out.println("clicked here");
         });
 
-        root.getChildren().add(q);
         for (int i = 0; i <NUM_OF_RABBITS; i++)
         {
             r1 = new Random().nextInt(window_width);
             r2 = new Random().nextInt(window_height);
             Rabbit wabbit = new Rabbit(r1,r2);
-            wabbit.setOnMouseClicked(e -> {
-                wabbit.setFill(Color.BURLYWOOD);
-
-            });
 
             rabbits.add(wabbit);
-            root.getChildren().add(wabbit);
+
+            Platform.runLater(() ->
+            {
+                root.getChildren().add(wabbit);
+            });
+
         }
 
         r1 = new Random().nextInt(window_width);
         r2 = new Random().nextInt(window_height);
 
-        fox = new Fox(r1,r2,rabbits);
-
-
-
-        fox.setOnMouseClicked(e -> {
-            System.out.println(fox);
-        });
-
-        root.getChildren().add(fox);
-
+        for (Node child : root.getChildren())
+        {
+            child.setOnMouseClicked(e -> {
+                System.out.println(e.getSource().toString());
+            });
+        }
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                fox.roam();
+                //fox.roam();
             }
         };
-        Scene scene = new Scene(root,window_width,window_height);
-        fox.radar.setFill(scene.getFill());
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
         timer.start();
+
+
+        root.setPrefSize(window_width,window_height);
+
+        return root;
+    }
+    @Override
+    public void start(Stage primaryStage) {
+
+
+        primaryStage.setScene(new Scene(createContent()));
+        primaryStage.show();
+
     }
 }

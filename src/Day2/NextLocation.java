@@ -14,7 +14,7 @@ public class NextLocation{
     private final int WINDOW_WIDTH;
     private final int WINDOW_HEIGHT;
 
-    NextLocation(int window_width, int window_height)
+    public NextLocation(int window_width, int window_height)
     {
         WINDOW_WIDTH = window_width;
         WINDOW_HEIGHT = window_height;

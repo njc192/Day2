@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Fox  extends Pane {
@@ -29,7 +30,7 @@ public class Fox  extends Pane {
     {
         fox = new Rectangle(WIDTH,HEIGHT, Color.ORANGE);
 
-        rabbits = rabbitList;
+        rabbits = new ArrayList<Rabbit>();
         radar = new Circle(RADIUS);
 
         radar.setTranslateX(getTranslateX() + WIDTH/2.0);

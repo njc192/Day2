@@ -9,3 +9,8 @@
 1 foxes roam around unless it sees a rabbit
 2 foxes chase rabbits
 3 rabbits do not move just spawn
+//works pretty well... for some reason mouse clicks were wayy off
+
+
+1 create terrain that is simple but random
+2
